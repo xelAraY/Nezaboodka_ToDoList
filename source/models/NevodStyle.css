@@ -1,0 +1,87 @@
+/* Light theme */
+
+.token.comment {
+  color: #008000;
+}
+
+.token.string,
+.token.string-attrs {
+  color: #A31515;
+}
+
+.token.namespace,
+.token.pattern-name,
+.token.standard-pattern-name,
+.token.standard-pattern-attr,
+.token.name,
+.token.search {
+  color: #267F99;
+}
+
+.token.field-name,
+.token.operator.field-hidden-mark,
+.token.field-capture .colon {
+  color: #795E26;
+}
+
+.token.operator {
+  color: #0F0F0F;
+}
+
+.token.keyword,
+.token.conjunction,
+.token.exception,
+.token.quantifier,
+.token.optionality {
+  color: #23E;
+}
+
+.token.punctuation {
+  color: #0F0F0F;
+}
+
+/* Dark theme */
+
+.dark .token {
+  color: #F0F0F0;
+}
+
+.dark .token.comment {
+  color: #808090;
+}
+
+.dark .token.string,
+.dark .token.string .token.string-attrs {
+  color: #FFC0C0;
+}
+
+.dark .token.namespace,
+.dark .token.pattern-name,
+.dark .token.standard-pattern-name,
+.dark .token.standard-pattern-attr,
+.dark .token.name,
+.dark .token.search {
+  color: #5EF9C0;
+}
+
+.dark .token.field-name,
+.dark .token.operator.field-hidden-mark,
+.dark .token.field-capture .colon {
+  color: #FFFFA0;
+}
+
+.dark .token.operator {
+  color: #F0F0F0;
+}
+
+.dark .token.keyword,
+.dark .token.conjunction,
+.dark .token.exception,
+.dark .token.quantifier,
+.dark .token.optionality {
+  color: #67E8FF;
+}
+
+.dark .token.punctuation {
+  color: #D1D1D1;
+}
