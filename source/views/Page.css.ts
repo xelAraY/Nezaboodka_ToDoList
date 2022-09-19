@@ -19,7 +19,6 @@ export const style = restyler(() => {
   return {
     Page: css`
       margin: 0;
-      display: grid;
       gap: 2em 4em;
       grid-template-rows: auto 1fr;
       grid-template-columns: 1fr 1fr 1.2fr;
@@ -32,15 +31,11 @@ export const style = restyler(() => {
     `,
 
     Title: css`
-      grid-row: 1 / span 1;
-      grid-column: 1 / span 2;
+      text-align: center;
       font-size: 300%;
       font-weight: bold;
-      line-height: 1.2;
+      color: white;
       text-transform: uppercase;
-      padding-left: 1.5ch;
-      border-left: 0.12ch solid ${themes.active.menuItemSelectedForeground};
-      color: ${themes.active.titleForeground};
     `,
 
     Content: css`
@@ -59,6 +54,49 @@ export const style = restyler(() => {
 
     RightSide,
 
+    List: css`
+
+    `,
+
+    Completed_Tasks: css`
+
+    `,
+
+    Input_Block: css`
+      display: flex;
+      margin: 15px 15px 0 15px;
+      border: solid black;
+    `,
+
+    Input_Area: css`
+      font-size: 15px;
+      resize: none;
+      width: 100%;
+      background-color: rgba(0, 0 ,0 , 0.4);
+      :hover {
+        background-color: rgba(136, 149, 144, 0.1);
+      }
+      transition: background-color .5s;
+      border: none;
+    `,
+
+    Submit: css`
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      background-color: rgba(0, 0, 0, 0.4);
+      :hover {
+        background-color: rgba(136, 149, 144, 0.1);
+      }
+      transition: background-color .5s;
+    `,
+
+    Submit_Img: css`
+      height: 25px;
+      width: 25px;
+      margin: 5px;
+    `,
+
     Description: css`
       font-size: 110%;
 
@@ -70,12 +108,10 @@ export const style = restyler(() => {
 
       b {
         font-weight: inherit;
-        color: ${themes.active.emphasizedText};
       }
 
       a {
         border-bottom: 0.05em dashed ${themes.active.emphasizedText};
-        color: ${themes.active.emphasizedText};
       }
     `,
 

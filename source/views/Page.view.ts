@@ -8,10 +8,11 @@ export function PageView(page: Page, customizeContent?: Customize<HTMLElement>, 
       e.className = style.class.Page
       Div('Title', e => {
         e.className = style.class.Title
-        e.innerHTML = page.title
+        e.innerHTML = 'Мой список дел'
       })
       Div('Content', e => {
         e.className = style.class.Content
+
       }).wrapWith(customizeContent)
     }).wrapWith(customizeRightSide)
   )
