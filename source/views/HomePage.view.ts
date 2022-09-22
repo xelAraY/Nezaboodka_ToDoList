@@ -1,7 +1,7 @@
-import { Div, Img, Input, RxDiv, RxLI, RxUL, TextArea } from 'reactronic-dom'
+import { Div, Img, RxUL, TextArea } from 'reactronic-dom'
 import { PageView } from './Page.view'
 import { style } from './Page.css'
-import { App, ProjectLink } from '../models/App'
+import { App } from '../models/App'
 import { taskBlock } from './Task.view'
 
 export function HomePageView(app: App) {

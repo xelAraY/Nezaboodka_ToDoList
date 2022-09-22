@@ -1,4 +1,5 @@
 import { ReactiveObject, reaction, Transaction, isnonreactive, nonreactive, transaction } from 'reactronic'
+import { HtmlSensors } from 'reactronic-dom'
 import { Page } from './Page'
 import { Task } from './Task'
 
@@ -7,12 +8,23 @@ export const ProjectLink = 'https://github.com/xelAraY/Nezaboodka_ToDoList'
 export class App extends ReactiveObject {
   @isnonreactive readonly version: string
   @isnonreactive readonly homePage: Page;
+  sensors: HtmlSensors
   tasksList: Task[] = []
 
   constructor(version: string) {
     super()
     this.version = version
     this.homePage = new Page('/home')
+    this.sensors = new HtmlSensors()
+  }
+
+  @reaction
+  handleClock(): void {
+    const pointer = this.sensors.pointer
+    const data = pointer.clicked
+    if (data instanceof Function){
+      data()
+    }
   }
 
   convertText(text: string): string {
@@ -24,12 +36,14 @@ export class App extends ReactiveObject {
 
   @transaction
   addTask(text: string): void {
-    this.tasksList.push(new Task(this.convertText(text)))
+    const taskList = this.tasksList = this.tasksList.toMutable()
+    taskList.push(new Task(this.convertText(text)))
   }
 
   @transaction
   deleteTask(task: Task): void {
-    this.tasksList.splice(this.tasksList.indexOf(task), 1)
+    const taskList = this.tasksList = this.tasksList.toMutable()
+    taskList.splice(this.tasksList.indexOf(task), 1)
   }
 
   @transaction

@@ -1,4 +1,4 @@
-import { Div, Img, Input, RxLI } from 'reactronic-dom'
+import { Div, Img, RxLI } from 'reactronic-dom'
 import { Task } from '../models/Task'
 import { App } from '../models/App'
 import { style } from './Task.css'

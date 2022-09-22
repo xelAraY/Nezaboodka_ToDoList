@@ -8,6 +8,7 @@ export function AppWindow(
   return (
     Div('Body', e => {
       e.className = style.class.Body
+      app.sensors.listen(e)
       HomePageView(app)
     })
   )
