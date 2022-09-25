@@ -4,18 +4,6 @@ import { themes } from './Themes'
 
 export const style = restyler(() => {
 
-  const RightSide = css`
-    grid-row: 1 / span 2;
-    grid-column: 3;
-    overflow: hidden;
-
-    @media screen and (max-width: 450px) {
-      grid-row: 2 / span 1;
-      grid-column: 1 / span 2;
-      justify-self: center;
-    }
-  `
-
   return {
     Page: css`
       margin: 0;
@@ -23,11 +11,6 @@ export const style = restyler(() => {
       grid-template-rows: auto 1fr;
       grid-template-columns: 1fr 1fr 1.2fr;
       overflow-x: hidden;
-
-      @media screen and (max-width: 450px) {
-        grid-template-rows: auto auto 1fr;
-        grid-template-columns: 1fr 1fr;
-      }
     `,
 
     Title: css`
@@ -45,50 +28,41 @@ export const style = restyler(() => {
       line-height: 1.2;
       padding-bottom: 0.5ch;
       overflow: hidden;
-
-      @media screen and (max-width: 450px) {
-        grid-row: 3 / span 1;
-        font-size: 120%;
-      }
     `,
-
-    RightSide,
 
     List: css`
-
-    `,
-
-    Completed_Tasks: css`
 
     `,
 
     Input_Block: css`
       display: flex;
       margin: 15px 15px 0 15px;
-      border: solid black;
     `,
 
     Input_Area: css`
-      font-size: 15px;
+      font-size: 20px;
       resize: none;
       width: 100%;
-      background-color: rgba(0, 0 ,0 , 0.4);
+      background-color: rgb(254, 255 ,254);
       :hover {
-        background-color: rgba(136, 149, 144, 0.1);
+        background-color: rgba(254, 255, 254, 0.7);
       }
       transition: background-color .5s;
-      border: none;
+      border: 2px solid rgb(7, 68, 175);
+      border-radius: 10px;
     `,
 
     Submit: css`
       display: flex;
       align-items: center;
       cursor: pointer;
-      background-color: rgba(0, 0, 0, 0.4);
+      background-color: rgb(254, 255 ,254);
       :hover {
-        background-color: rgba(136, 149, 144, 0.1);
+        background-color: rgba(254, 255, 254, 0.7);
       }
       transition: background-color .5s;
+      border: 2px solid rgb(7, 68, 175);
+      border-radius: 10px;
     `,
 
     Submit_Img: css`
@@ -113,19 +87,6 @@ export const style = restyler(() => {
       a {
         border-bottom: 0.05em dashed ${themes.active.emphasizedText};
       }
-    `,
-
-    Picture: css`
-      ${RightSide}
-
-      img {
-        width: 100%;
-        height: auto;
-      }
-
-      @media screen and (max-width: 450px) {
-        width: 60%;
-      }
-    `,
+    `
   }
 })

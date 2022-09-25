@@ -1,7 +1,6 @@
 export interface Theme {
   readonly name: string
 
-  background: string
   foreground: string
   logoBackground: string
   logoForeground: string
@@ -40,7 +39,6 @@ export interface Theme {
 export class DarkBlueTheme implements Theme {
   readonly name = 'DarkBlueTheme'
 
-  background = '#14344F'
   foreground = '#E0E0E0'
   logoBackground = '#00B3FF' // light blue
   logoForeground = 'white'

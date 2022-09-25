@@ -17,13 +17,6 @@ export function HomePageView(app: App) {
           }
         })
 
-        if (id === app.tasksList.length && id !== 0){
-          Div('Completed_Tasks', e => {
-            e.className = style.class.Completed_Tasks
-            e.innerHTML = 'Completed '+id.toString()
-          })
-        }
-
         app.tasksList.forEach(element => {
           if (!element.isActive) {
             taskBlock(element, id.toString(), app)
@@ -54,7 +47,7 @@ export function HomePageView(app: App) {
             }
           }
           Img('Submit_Img', e => {
-            e.src = '../assets/plus.png'
+            e.src = '../assets/plus-solid.svg'
             e.className = style.class.Submit_Img
           })
         })

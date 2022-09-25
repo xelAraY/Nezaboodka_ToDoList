@@ -10,7 +10,13 @@ export function taskBlock(task: Task, id: string, app: App) {
 
       if (!task.isEdit) {
         Div('Task_text', e => {
-          e.className = style.class.Task_text
+          if (task.isActive) {
+            e.className = style.class.Active_Task_text
+          }
+          else {
+            e.className = style.class.Done_Task_text
+          }
+
           e.dataForSensor.click = () => task.changeState()
           e.innerHTML = task.text
         })
@@ -32,16 +38,18 @@ export function taskBlock(task: Task, id: string, app: App) {
           e.className = style.class.Task_edit
           e.dataForSensor.click = () => task.isEdit ? app.editTask(task, e.innerHTML) : app.editTask(task)
           Img('Edit_icon', e => {
-            e.src = task.isEdit ? '../assets/check.png' : '../assets/pencil.png'
+            e.src = task.isEdit ? '../assets/check-solid.svg' : '../assets/pencil-solid.svg'
+            e.className = style.class.Edit_Icon
           })
         })
       }
 
       Div('Task_delete', e => {
         e.className = style.class.Task_delete
-        e.dataForSensor.click = () => { app.deleteTask }
+        e.dataForSensor.click = () => { app.deleteTask(task) }
         Img('Delete-icon', e => {
-          e.src = '../assets/trash.png'
+          e.src = '../assets/trash-solid.svg'
+          e.className = style.class.Delete_Icon
         })
       })
     })

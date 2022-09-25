@@ -1,4 +1,4 @@
-import { ReactiveObject, reaction, Transaction, isnonreactive, nonreactive, transaction } from 'reactronic'
+import { ReactiveObject, reaction, isnonreactive, transaction } from 'reactronic'
 import { HtmlSensors } from 'reactronic-dom'
 import { Page } from './Page'
 import { Task } from './Task'
