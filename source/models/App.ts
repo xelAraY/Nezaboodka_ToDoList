@@ -1,5 +1,5 @@
 import { ReactiveObject, reaction, isnonreactive, transaction } from 'reactronic'
-import { HtmlSensors } from 'reactronic-dom'
+import { HtmlSensors, KeyboardModifiers } from 'reactronic-dom'
 import { Page } from './Page'
 import { Task } from './Task'
 
@@ -16,14 +16,14 @@ export class App extends ReactiveObject {
     this.version = version
     this.homePage = new Page('/home')
     this.sensors = new HtmlSensors()
-  }
-
-  @reaction
-  handleClock(): void {
-    const pointer = this.sensors.pointer
-    const data = pointer.clicked
-    if (data instanceof Function){
-      data()
+    const tasks = JSON.parse(localStorage.getItem('tasks') as string) as Task[]
+    if (tasks !== null){
+      this.tasksList = tasks.map( element => {
+        const task = new Task(element.text)
+        task.isActive = element.isActive
+        task.isEdit = element.isEdit
+        return task
+      })
     }
   }
 
@@ -56,5 +56,31 @@ export class App extends ReactiveObject {
     }
     else
       task.isEdit = !task.isEdit
+  }
+
+  @reaction
+  handleClick(): void {
+    const pointer = this.sensors.pointer
+    const data = pointer.clicked
+    if (data instanceof Function) {
+      data()
+    }
+  }
+
+  @reaction
+  handleKeybord(): void {
+    const keyboard = this.sensors.keyboard
+    if ((keyboard.down === 'Enter') && (keyboard.modifiers !== KeyboardModifiers.Shift)) {
+      const data = keyboard.elementDataList[0]
+      if (data instanceof Function) {
+        data()
+      }
+      this.sensors.keyboard.preventDefault = true
+    }
+  }
+
+  @reaction
+  saveTasks(): void {
+    localStorage.setItem('tasks', JSON.stringify(this.tasksList))
   }
 }

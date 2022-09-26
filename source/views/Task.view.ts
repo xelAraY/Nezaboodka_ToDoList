@@ -7,7 +7,7 @@ export function taskBlock(task: Task, id: string, app: App) {
   return (
     RxLI('Task'+id, task, e => {
       e.className = style.class.Task
-
+      let inputArea: HTMLDivElement
       if (!task.isEdit) {
         Div('Task_text', e => {
           if (task.isActive) {
@@ -24,6 +24,7 @@ export function taskBlock(task: Task, id: string, app: App) {
       else {
         Div('Input_text', e => {
           e.contentEditable = 'true'
+          inputArea = e
           e.dataForSensor.keyboard = () => {
             if (e.innerHTML !== '')
               app.editTask(task, e.innerHTML)
@@ -36,7 +37,7 @@ export function taskBlock(task: Task, id: string, app: App) {
       if (task.isActive) {
         Div('Task_edit', e => {
           e.className = style.class.Task_edit
-          e.dataForSensor.click = () => task.isEdit ? app.editTask(task, e.innerHTML) : app.editTask(task)
+          e.dataForSensor.click = () => task.isEdit ? app.editTask(task, inputArea.innerHTML) : app.editTask(task)
           Img('Edit_icon', e => {
             e.src = task.isEdit ? '../assets/check-solid.svg' : '../assets/pencil-solid.svg'
             e.className = style.class.Edit_Icon

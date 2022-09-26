@@ -44,6 +44,7 @@ export function HomePageView(app: App) {
           e.dataForSensor.click = () => {
             if (inputArea.value.trim() != ''){
               app.addTask(inputArea.value)
+              inputArea.value = ''
             }
           }
           Img('Submit_Img', e => {
