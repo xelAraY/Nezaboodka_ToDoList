@@ -36,13 +36,16 @@ export function taskBlock(task: Task, id: string, app: App) {
           }
           e.innerHTML = task.text
           e.className = style.class.Input_text
+          e.focus()
         })
       }
 
       if (task.isActive) {
         Div('Task_edit', e => {
           e.className = style.class.Task_edit
-          e.dataForSensor.click = () => task.isEdit ? app.editTask(task, inputArea.innerHTML) : app.editTask(task)
+          e.dataForSensor.click = () => {
+            task.isEdit ? app.editTask(task, inputArea.innerHTML) : app.editTask(task)
+          }
           Img('Edit_icon', e => {
             e.src = task.isEdit ? '../assets/check-solid.svg' : '../assets/pencil-solid.svg'
             e.className = style.class.Edit_Icon
