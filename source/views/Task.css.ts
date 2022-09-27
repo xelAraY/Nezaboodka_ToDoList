@@ -7,19 +7,18 @@ export const style = restyler(() => {
     Task: css`
       display: flex;
       margin: 15px 15px 0 15px;
-      border: 2px solid rgb(7, 68, 175);
-      animation-duration: 2s;
+      animation-duration: 1.5s;
       animation-name: slidein;
 
       @keyframes slidein {
         from {
           margin-left: 100%;
-          width: 300%;
+          width: 97.8%;
         }
 
         to {
           margin-left: 15px;
-          width: 100%;
+          width: 97.8%;
         }
       }
 
@@ -35,7 +34,9 @@ export const style = restyler(() => {
         background-color: rgba(0, 255 , 0, 0.5);
       }
       transition: background-color .5s;
-
+      border: 2px solid rgb(7, 68, 175);
+      border-radius: 6px 0 0 6px;
+      border-right: none;
     `,
 
     Done_Task_text: css`
@@ -50,6 +51,9 @@ export const style = restyler(() => {
       transition: background-color .5s;
       color: rgb(170, 217, 219);
       text-decoration: line-through;
+      border: 2px solid rgb(7, 68, 175);
+      border-radius: 6px 0 0 6px;
+      border-right: none;
     `,
 
     Task_edit: css`
@@ -59,6 +63,9 @@ export const style = restyler(() => {
       }
       transition: background-color .5s;
       cursor: pointer;
+      border: 2px solid rgb(7, 68, 175);
+      border-left: none;
+      border-right: none;
     `,
 
     Task_delete: css`
@@ -68,6 +75,9 @@ export const style = restyler(() => {
       }
       transition: background-color .5s;
       cursor: pointer;
+      border-radius: 0 6px 6px 0;
+      border: 2px solid rgb(7, 68, 175);
+      border-left: none;
     `,
 
     Input_text: css`

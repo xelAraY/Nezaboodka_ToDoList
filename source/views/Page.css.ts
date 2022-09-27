@@ -11,6 +11,8 @@ export const style = restyler(() => {
       grid-template-rows: auto 1fr;
       grid-template-columns: 1fr 1fr 1.2fr;
       overflow-x: hidden;
+      position: relative;
+      overflow-y: hidden;
     `,
 
     Title: css`
@@ -31,25 +33,33 @@ export const style = restyler(() => {
     `,
 
     List: css`
-
+      overflow: auto scroll;
+      height: calc(100vh - 120px);
     `,
 
     Input_Block: css`
       display: flex;
-      margin: 15px 15px 0 15px;
+      position: fixed;
+      bottom: 20px;
+      width: 100%;
+      margin: 15px;
+      right: 0;
+      left: 0;
     `,
 
     Input_Area: css`
       font-size: 20px;
       resize: none;
-      width: 100%;
+      height: 35px;
+      width: calc(100vw - 73px);
       background-color: rgb(254, 255 ,254);
       :hover {
         background-color: rgba(254, 255, 254, 0.7);
       }
       transition: background-color .5s;
       border: 2px solid rgb(7, 68, 175);
-      border-radius: 10px;
+      border-radius: 6px 0 0 6px;
+      border-right: none;
     `,
 
     Submit: css`
@@ -62,7 +72,8 @@ export const style = restyler(() => {
       }
       transition: background-color .5s;
       border: 2px solid rgb(7, 68, 175);
-      border-radius: 10px;
+      border-radius: 0 6px 6px 0;
+      border-left: none;
     `,
 
     Submit_Img: css`

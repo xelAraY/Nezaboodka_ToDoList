@@ -35,6 +35,7 @@ export function HomePageView(app: App) {
           e.dataForSensor.keyboard = () => {
             if (inputArea.value.trim() != ''){
               app.addTask(inputArea.value)
+              inputArea.value = ''
             }
           }
         })
