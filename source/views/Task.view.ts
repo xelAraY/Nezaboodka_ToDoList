@@ -8,6 +8,11 @@ export function taskBlock(task: Task, id: string, app: App) {
     RxLI('Task'+id, task, e => {
       e.className = style.class.Task
       let inputArea: HTMLDivElement
+
+      e.dataForSensor.htmlDraggable = task.isActive && !task.isEdit ? task : undefined
+      e.dataForSensor.htmlDrag = task.isActive && !task.isEdit ? task : undefined
+      e.draggable = true
+
       if (!task.isEdit) {
         Div('Task_text', e => {
           if (task.isActive) {

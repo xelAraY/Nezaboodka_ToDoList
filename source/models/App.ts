@@ -1,5 +1,5 @@
 import { ReactiveObject, reaction, isnonreactive, transaction } from 'reactronic'
-import { HtmlSensors, KeyboardModifiers } from 'reactronic-dom'
+import { HtmlSensors, KeyboardModifiers, P } from 'reactronic-dom'
 import { Page } from './Page'
 import { Task } from './Task'
 
@@ -82,5 +82,42 @@ export class App extends ReactiveObject {
   @reaction
   saveTasks(): void {
     localStorage.setItem('tasks', JSON.stringify(this.tasksList))
+  }
+
+  @reaction
+  handleDragAndDrop(): void{
+    const drag = this.sensors.htmlDrag
+    const task = drag.draggable as Task | undefined
+    if (task !== undefined){
+      if (drag.dragStarted){
+        drag.effectAllowed = 'copyMove'
+        if (drag.draggingOver){
+          if (drag.dragTarget instanceof Task){
+            drag.dropAllowed = true
+            drag.dropEffect = 'copy'
+          }
+          else{
+            drag.dropAllowed = false
+          }
+        }
+      }
+
+      if (drag.dragFinished){
+        if (drag.dropped){
+          if (drag.dragTarget instanceof Task){
+            const startInd = this.tasksList.indexOf(task)
+            const endInd = this.tasksList.indexOf(drag.dragTarget)
+            this.swapTasks(startInd, endInd)
+          }
+        }
+      }
+    }
+  }
+
+  swapTasks(startInd: number, endInd: number):void{
+    if (startInd != endInd){
+      const tasksList = this.tasksList = this.tasksList.toMutable();
+      [tasksList[startInd], tasksList[endInd]] = [this.tasksList[endInd], this.tasksList[startInd]]
+    }
   }
 }

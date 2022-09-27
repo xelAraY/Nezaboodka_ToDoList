@@ -31,7 +31,7 @@ export function HomePageView(app: App) {
         TextArea('Input_Area', e => {
           inputArea = e
           e.className = style.class.Input_Area
-          e.placeholder = 'Enter the task'
+          e.placeholder = 'Введите задачу'
           e.dataForSensor.keyboard = () => {
             if (inputArea.value.trim() != ''){
               app.addTask(inputArea.value)
