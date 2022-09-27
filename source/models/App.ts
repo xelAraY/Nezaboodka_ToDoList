@@ -116,8 +116,18 @@ export class App extends ReactiveObject {
 
   swapTasks(startInd: number, endInd: number):void{
     if (startInd != endInd){
-      const tasksList = this.tasksList = this.tasksList.toMutable();
-      [tasksList[startInd], tasksList[endInd]] = [this.tasksList[endInd], this.tasksList[startInd]]
+      const operation = startInd > endInd ? -1 : 1
+      const tasksList = this.tasksList = this.tasksList.toMutable()
+
+      // [tasksList[startInd], tasksList[endInd]] = [tasksList[endInd], tasksList[startInd]]
+      const modulo = Math.abs(startInd - endInd)
+      let leftOffset, rightOffset
+      for(let i = 0; i < modulo; i++){
+        leftOffset = i * operation + startInd
+        rightOffset = ((i + 1) * operation) + startInd;
+        [tasksList[leftOffset], tasksList[rightOffset]] = [this.tasksList[rightOffset], this.tasksList[leftOffset]]
+      }
+
     }
   }
 }
