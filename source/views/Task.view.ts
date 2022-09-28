@@ -3,7 +3,7 @@ import { Task } from '../models/Task'
 import { App } from '../models/App'
 import { style } from './Task.css'
 
-export function taskBlock(task: Task, id: string, app: App) {
+export function TaskBlock(task: Task, id: string, app: App) {
   return (
     RxLI('Task'+id, task, e => {
       e.className = style.class.Task

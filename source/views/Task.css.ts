@@ -7,21 +7,6 @@ export const style = restyler(() => {
     Task: css`
       display: flex;
       margin: 15px 15px 0 15px;
-      animation-duration: 1.5s;
-      animation-name: slidein;
-
-      @keyframes slidein {
-        from {
-          margin-left: 100%;
-          width: 97.8%;
-        }
-
-        to {
-          margin-left: 15px;
-          width: 97.8%;
-        }
-      }
-
     `,
 
     Active_Task_text: css`

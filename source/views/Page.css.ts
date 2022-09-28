@@ -1,6 +1,5 @@
 import { css } from '@emotion/css'
 import { restyler } from 'reactronic-dom'
-import { themes } from './Themes'
 
 export const style = restyler(() => {
 
@@ -81,23 +80,5 @@ export const style = restyler(() => {
       width: 25px;
       margin: 5px;
     `,
-
-    Description: css`
-      font-size: 110%;
-
-      img {
-        height: 0.93ch;
-        margin-left: 1ch;
-        margin-right: 1ch;
-      }
-
-      b {
-        font-weight: inherit;
-      }
-
-      a {
-        border-bottom: 0.05em dashed ${themes.active.emphasizedText};
-      }
-    `
   }
 })

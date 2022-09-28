@@ -2,24 +2,24 @@ import { Div, Img, RxUL, TextArea } from 'reactronic-dom'
 import { PageView } from './Page.view'
 import { style } from './Page.css'
 import { App } from '../models/App'
-import { taskBlock } from './Task.view'
+import { TaskBlock } from './Task.view'
 
 export function HomePageView(app: App) {
   return (
-    PageView(app.homePage, e => {
+    PageView(app, e => {
       RxUL('List', null, e => {
         e.className = style.class.List
         let id = 0
         app.tasksList.forEach(element => {
           if (element.isActive) {
-            taskBlock(element, id.toString(), app)
+            TaskBlock(element, id.toString(), app)
             id++
           }
         })
 
         app.tasksList.forEach(element => {
           if (!element.isActive) {
-            taskBlock(element, id.toString(), app)
+            TaskBlock(element, id.toString(), app)
             id++
           }
         })
@@ -31,7 +31,7 @@ export function HomePageView(app: App) {
         TextArea('Input_Area', e => {
           inputArea = e
           e.className = style.class.Input_Area
-          e.placeholder = 'Введите задачу'
+          e.placeholder = 'Enter the task...'
           e.dataForSensor.keyboard = () => {
             if (inputArea.value.trim() != ''){
               app.addTask(inputArea.value)

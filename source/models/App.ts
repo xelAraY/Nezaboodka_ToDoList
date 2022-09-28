@@ -1,20 +1,16 @@
 import { ReactiveObject, reaction, isnonreactive, transaction } from 'reactronic'
 import { HtmlSensors, KeyboardModifiers, P } from 'reactronic-dom'
-import { Page } from './Page'
 import { Task } from './Task'
 
 export const ProjectLink = 'https://github.com/xelAraY/Nezaboodka_ToDoList'
 
 export class App extends ReactiveObject {
-  @isnonreactive readonly version: string
-  @isnonreactive readonly homePage: Page;
   sensors: HtmlSensors
-  tasksList: Task[] = []
+  tasksList: Task[]
+
 
   constructor(version: string) {
     super()
-    this.version = version
-    this.homePage = new Page('/home')
     this.sensors = new HtmlSensors()
     const tasks = JSON.parse(localStorage.getItem('tasks') as string) as Task[]
     if (tasks !== null){
@@ -24,6 +20,9 @@ export class App extends ReactiveObject {
         task.isEdit = element.isEdit
         return task
       })
+    }
+    else {
+      this.tasksList = []
     }
   }
 
@@ -48,14 +47,10 @@ export class App extends ReactiveObject {
 
   @transaction
   editTask(task: Task, newText?: string): void {
-    if (task.isEdit) {
-      if (newText != null) {
-        task.text = this.convertText(newText)
-      }
-      task.isEdit = !task.isEdit
+    if (task.isEdit && newText != null) {
+      task.text = this.convertText(newText)
     }
-    else
-      task.isEdit = !task.isEdit
+    task.isEdit = !task.isEdit
   }
 
   @reaction
@@ -100,14 +95,14 @@ export class App extends ReactiveObject {
             drag.dropAllowed = false
           }
         }
-      }
 
-      if (drag.dragFinished){
-        if (drag.dropped){
-          if (drag.dragTarget instanceof Task){
-            const startInd = this.tasksList.indexOf(task)
-            const endInd = this.tasksList.indexOf(drag.dragTarget)
-            this.swapTasks(startInd, endInd)
+        if (drag.dragFinished){
+          if (drag.dropped){
+            if (drag.dragTarget instanceof Task){
+              const startInd = this.tasksList.indexOf(task)
+              const endInd = this.tasksList.indexOf(drag.dragTarget)
+              this.swapTasks(startInd, endInd)
+            }
           }
         }
       }

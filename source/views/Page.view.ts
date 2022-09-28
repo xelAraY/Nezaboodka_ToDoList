@@ -1,10 +1,10 @@
 import { Div, Customize } from 'reactronic-dom'
-import { Page } from '../models/Page'
+import { App } from '../models/App'
 import { style } from './Page.css'
 
-export function PageView(page: Page, customizeContent?: Customize<HTMLElement>, customizeRightSide?: Customize<HTMLElement>) {
+export function PageView(app: App, customizeContent?: Customize<HTMLElement>, customizeRightSide?: Customize<HTMLElement>) {
   return (
-    Div('PageView-' + page.pagePath, e => {
+    Div('PageView-', e => {
       e.className = style.class.Page
       Div('Title', e => {
         e.className = style.class.Title
