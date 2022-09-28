@@ -69,7 +69,10 @@ export const style = restyler(() => {
       font-size: 20px;
       resize: none;
       width: 100%;
-      background-color: rgb(254, 255 ,254);
+      background-color: rgb(254, 255, 254);
+      border: 2px solid rgb(7, 68, 175);
+      border-radius: 6px 0 0 6px;
+      border-right: none;
     `,
 
     Edit_Icon: css`
