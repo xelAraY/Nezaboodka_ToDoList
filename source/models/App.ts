@@ -28,9 +28,6 @@ export class App extends ReactiveObject {
 
   convertText(text: string): string {
     text.trim()
-    while (text.includes('\n')) {
-      text.replace('\n', '<br/>')
-    }
     return text
   }
 
