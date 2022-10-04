@@ -38,6 +38,14 @@ export function HomePageView(app: App) {
               inputArea.value = ''
             }
           }
+          e.onkeydown = () => {
+            const pixels = findLinesCount(e.value) * 20 + 15
+            const strPixels = pixels.toString() + 'px'
+            if(e.style.height != strPixels){
+              e.style.height = strPixels
+              e.style.maxHeight = strPixels
+            }
+          }
         })
 
         Div('Submit', e => {
@@ -56,4 +64,10 @@ export function HomePageView(app: App) {
       })
     })
   )
+}
+
+function findLinesCount(text: string):number{
+  const reg = /\r\n|\r|\n/
+  return text.split(reg).length
+
 }
