@@ -11,7 +11,7 @@ export function TaskBlock(task: Task, id: string, app: App) {
 
       e.dataForSensor.htmlDraggable = task.isActive && !task.isEdit ? task : undefined
       e.dataForSensor.htmlDrag = task.isActive && !task.isEdit ? task : undefined
-      e.draggable = true
+      e.draggable = task.isActive && !task.isEdit ? true : false
 
       if (!task.isEdit) {
         Div('Task_text', e => {

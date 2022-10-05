@@ -33,7 +33,7 @@ export const style = restyler(() => {
 
     List: css`
       overflow: auto scroll;
-      height: calc(100vh - 120px);
+      height: calc(100vh - 180px);
     `,
 
     Input_Block: css`
@@ -42,7 +42,7 @@ export const style = restyler(() => {
       bottom: 20px;
       width: 100%;
       margin: 15px;
-      right: 0;
+      right: 15px;
       left: 0;
     `,
 
@@ -73,6 +73,7 @@ export const style = restyler(() => {
       border: 2px solid rgb(7, 68, 175);
       border-radius: 0 6px 6px 0;
       border-left: none;
+      margin-right: 32px;
     `,
 
     Submit_Img: css`
@@ -80,5 +81,22 @@ export const style = restyler(() => {
       width: 25px;
       margin: 5px;
     `,
+
+    Priority: css`
+      align-items: center;
+      cursor: pointer;
+      background-color: rgb(254, 255 ,254);
+      :hover {
+        background-color: rgba(254, 255, 254, 0.7);
+      }
+      transition: background-color .5s;
+      border: 2px solid rgb(7, 68, 175);
+      border-left: none;
+      border-right: none;
+    `,
+
+    Priority_Name: css`
+
+    `
   }
 })

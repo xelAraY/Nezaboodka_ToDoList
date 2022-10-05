@@ -1,6 +1,7 @@
 import { ReactiveObject, reaction, isnonreactive, transaction } from 'reactronic'
-import { HtmlSensors, KeyboardModifiers, P } from 'reactronic-dom'
+import { HtmlSensors, KeyboardModifiers } from 'reactronic-dom'
 import { Task } from './Task'
+import { Priority } from '../models/Task'
 
 export const ProjectLink = 'https://github.com/xelAraY/Nezaboodka_ToDoList'
 
@@ -8,14 +9,13 @@ export class App extends ReactiveObject {
   sensors: HtmlSensors
   tasksList: Task[]
 
-
   constructor(version: string) {
     super()
     this.sensors = new HtmlSensors()
     const tasks = JSON.parse(localStorage.getItem('tasks') as string) as Task[]
     if (tasks !== null){
       this.tasksList = tasks.map( element => {
-        const task = new Task(element.text)
+        const task = new Task(element.text, element.priority)
         task.isActive = element.isActive
         task.isEdit = element.isEdit
         return task
@@ -27,16 +27,20 @@ export class App extends ReactiveObject {
   }
 
   convertText(text: string): string {
-    while (text.includes('\n')) {
-      text.replace('\n', '<br/>')
+    console.log(text)
+    for(let i = 0; i < text.length; i++){
+      if (text[i] === '\n'){
+        text.replace('\n', '<br/>')
+      }
     }
+    console.log(text)
     return text
   }
 
   @transaction
-  addTask(text: string): void {
+  addTask(text: string, priority: string): void {
     const taskList = this.tasksList = this.tasksList.toMutable()
-    taskList.push(new Task(this.convertText(text)))
+    taskList.push(new Task(this.convertText(text), priority))
   }
 
   @transaction

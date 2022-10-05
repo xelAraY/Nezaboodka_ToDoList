@@ -11,7 +11,6 @@ export const style = restyler(() => {
 
     Active_Task_text: css`
       font-size: 20px;
-      resize: none;
       width: 100%;
       background-color: rgb(254, 255, 254);
       cursor: pointer;
@@ -26,7 +25,6 @@ export const style = restyler(() => {
 
     Done_Task_text: css`
       font-size: 20px;
-      resize: none;
       width: 100%;
       background-color: rgb(254, 255, 254);
       cursor: pointer;
