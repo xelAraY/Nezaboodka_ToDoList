@@ -23,20 +23,26 @@ export function TaskBlock(task: Task, id: string, app: App) {
           }
 
           e.dataForSensor.click = () => task.changeState()
-          e.innerHTML = task.text
+          let inputText = task.text
+          while (inputText.includes('\n')){
+            inputText = inputText.replace('\n', '<br>')
+          }
+          e.innerHTML = inputText
         })
       }
       else {
         Div('Input_text', e => {
           e.contentEditable = 'true'
           inputArea = e
-          e.dataForSensor.keyboard = () => {
-            if (e.innerHTML !== '')
-              app.editTask(task, e.innerHTML)
-          }
           e.innerHTML = task.text
           e.className = style.class.Input_text
           e.focus()
+          e.dataForSensor.keyboard = (isEdit: boolean) => {
+            if (e.innerHTML.trim() !== '' && isEdit)
+              app.editTask(task, e.innerHTML)
+            if (!isEdit)
+              e.innerHTML = e.innerHTML + '\n'
+          }
         })
       }
 

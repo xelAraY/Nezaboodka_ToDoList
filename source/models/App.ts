@@ -27,13 +27,7 @@ export class App extends ReactiveObject {
   }
 
   convertText(text: string): string {
-    console.log(text)
-    for(let i = 0; i < text.length; i++){
-      if (text[i] === '\n'){
-        text.replace('\n', '<br/>')
-      }
-    }
-    console.log(text)
+    text.trim()
     return text
   }
 
@@ -72,7 +66,7 @@ export class App extends ReactiveObject {
     if ((keyboard.down === 'Enter') && (keyboard.modifiers !== KeyboardModifiers.Shift)) {
       const data = keyboard.elementDataList[0]
       if (data instanceof Function) {
-        data()
+        data(true)
       }
       this.sensors.keyboard.preventDefault = true
     }
