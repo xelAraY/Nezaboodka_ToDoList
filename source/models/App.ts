@@ -8,10 +8,13 @@ export const ProjectLink = 'https://github.com/xelAraY/Nezaboodka_ToDoList'
 export class App extends ReactiveObject {
   sensors: HtmlSensors
   tasksList: Task[]
+  id: number
 
   constructor(version: string) {
     super()
     this.sensors = new HtmlSensors()
+    this.id = 0
+
     const tasks = JSON.parse(localStorage.getItem('tasks') as string) as Task[]
     if (tasks !== null){
       this.tasksList = tasks.map( element => {
@@ -29,6 +32,17 @@ export class App extends ReactiveObject {
   convertText(text: string): string {
     text.trim()
     return text
+  }
+
+  @transaction
+  GetCount(priority: string): number{
+    let count = 0
+    this.tasksList.forEach((task) => {
+      if (task.priority === priority){
+        count++
+      }
+    })
+    return count
   }
 
   @transaction

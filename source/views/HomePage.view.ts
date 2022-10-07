@@ -6,24 +6,23 @@ import { TaskBlock } from './Task.view'
 import { Priority } from '../models/Task'
 
 function DisplayPriority(app: App, priority: string) {
-  let id = 0
 
-  Div('Priority_Name', e => {
+  Div('Priority_Name'+priority, e => {
     e.className = style.class.Priority_Name
     e.innerHTML = priority
   })
 
   app.tasksList.forEach(element => {
     if (element.isActive && element.priority === priority) {
-      TaskBlock(element, id.toString(), app)
-      id++
+      TaskBlock(element, app.id.toString(), app)
+      app.id++
     }
   })
 
   app.tasksList.forEach(element => {
     if (!element.isActive && element.priority === priority) {
-      TaskBlock(element, id.toString(), app)
-      id++
+      TaskBlock(element, app.id.toString(), app)
+      app.id++
     }
   })
 }
@@ -38,8 +37,9 @@ export function HomePageView(app: App) {
         e.className = style.class.List
 
         for (const priority in Priority) {
-          console.log(priority)
-          DisplayPriority(app, priority)
+          if (app.GetCount(priority) > 0) {
+            DisplayPriority(app, priority)
+          }
         }
       })
 

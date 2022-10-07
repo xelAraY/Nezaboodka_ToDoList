@@ -96,7 +96,10 @@ export const style = restyler(() => {
     `,
 
     Priority_Name: css`
-
+      text-align: center;
+      color: white;
+      font-size: 30px;
+      margin-top: 15px;
     `
   }
 })
