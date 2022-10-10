@@ -6,12 +6,12 @@ import { TaskBlock } from './Task.view'
 import { Priority } from '../models/Task'
 
 function DisplayPriority(app: App, priority: string) {
-
-  Div('Priority_Name'+priority, e => {
-    e.className = style.class.Priority_Name
-    e.innerHTML = priority
-  })
-
+  if (app.GetCount(priority) !== 0){
+    Div('Priority_Name'+priority, e => {
+      e.className = style.class.Priority_Name
+      e.innerHTML = priority
+    })
+  }
   app.tasksList.forEach(element => {
     if (element.isActive && element.priority === priority) {
       TaskBlock(element, app.id.toString(), app)
@@ -35,11 +35,8 @@ export function HomePageView(app: App) {
 
       RxUL('List', null, e => {
         e.className = style.class.List
-
-        for (const priority in Priority) {
-          if (app.GetCount(priority) > 0) {
-            DisplayPriority(app, priority)
-          }
+        for (const priority in Priority){
+          DisplayPriority(app, priority)
         }
       })
 
@@ -70,10 +67,9 @@ export function HomePageView(app: App) {
           e.className = style.class.Priority
           select = e
           options = e.options
-          options[options.length] = new Option(Priority.Today, Priority.Today, true)
-          options[options.length] = new Option(Priority.Tomorrow, Priority.Tomorrow, false)
-          options[options.length] = new Option(Priority.Soon, Priority.Soon, false)
-          options[options.length] = new Option(Priority.Overdue, Priority.Overdue, false)
+          for(const priority in Priority){
+            options[options.length] = new Option(priority, priority, priority === Priority.Today ? true : false)
+          }
         })
 
         Div('Submit', e => {
