@@ -40,8 +40,8 @@ export function HomePageView(app: App) {
         }
       })
 
-      Div('Input_Block', e => {
-        e.className = style.class.Input_Block
+      Div('Input_Block', block => {
+        block.className = style.class.Input_Block
         let inputArea: HTMLTextAreaElement
         TextArea('Input_Area', e => {
           inputArea = e
@@ -54,14 +54,6 @@ export function HomePageView(app: App) {
               inputArea.value = ''
             }
           }
-          e.onkeydown = () => {
-            const pixels = findLinesCount(e.value) * 20 + 15
-            const strPixels = pixels.toString() + 'px'
-            if(e.style.height != strPixels){
-              e.style.height = strPixels
-              e.style.maxHeight = strPixels
-            }
-          }
           e.onmousemove = (_) => {
             const delta = Math.abs(_.offsetY / e.offsetHeight)
             if ((delta < 0.05) || (1 - delta < 0.05)){
@@ -70,13 +62,21 @@ export function HomePageView(app: App) {
               e.style.cursor = 'default'
             }
           }
-          e.ondragend = (_) => {
+          const func = (_: DragEvent) => {
             const y = _.offsetY
             const height:number = Number(e.style.height.replace('px',''))
-            e.style.height = (height - y).toString() + 'px'
-            e.style.maxHeight = e.style.height
-            e.style.opacity = '1'
+            if (height - y > 35 && _.pageY != 0){
+              const heightStyle: string = (height - y).toString() + 'px'
+              e.style.height = heightStyle
+              e.style.maxHeight = heightStyle
+            }else{
+              e.style.height = '35 px'
+              e.style.maxHeight = '35 px'
+            }
+            console.log(height - y)
           }
+          e.ondrag = func
+          e.ondragend = func
         })
 
         RxSelect('Priority', null, e => {
