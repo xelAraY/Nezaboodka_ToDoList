@@ -1,4 +1,4 @@
-import { Div, Img, RxUL, RxSelect, Select, TextArea } from 'reactronic-dom'
+import { Div, Img, RxUL, RxSelect, Select, TextArea, RxNode } from 'reactronic-dom'
 import { PageView } from './Page.view'
 import { style } from './Page.css'
 import { App } from '../models/App'
@@ -46,6 +46,7 @@ export function HomePageView(app: App) {
         TextArea('Input_Area', e => {
           inputArea = e
           e.className = style.class.Input_Area
+          e.draggable = true
           e.placeholder = 'Enter the task...'
           e.dataForSensor.keyboard = () => {
             if (inputArea.value.trim() != ''){
@@ -60,6 +61,21 @@ export function HomePageView(app: App) {
               e.style.height = strPixels
               e.style.maxHeight = strPixels
             }
+          }
+          e.onmousemove = (_) => {
+            const delta = Math.abs(_.offsetY / e.offsetHeight)
+            if ((delta < 0.05) || (1 - delta < 0.05)){
+              e.style.cursor = 'ns-resize'
+            }else{
+              e.style.cursor = 'default'
+            }
+          }
+          e.ondragend = (_) => {
+            const y = _.offsetY
+            const height:number = Number(e.style.height.replace('px',''))
+            e.style.height = (height - y).toString() + 'px'
+            e.style.maxHeight = e.style.height
+            e.style.opacity = '1'
           }
         })
 
