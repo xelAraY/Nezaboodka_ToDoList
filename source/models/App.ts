@@ -127,6 +127,7 @@ export class App extends ReactiveObject {
       const tasksList = this.tasksList = this.tasksList.toMutable()
 
       // [tasksList[startInd], tasksList[endInd]] = [tasksList[endInd], tasksList[startInd]]
+      tasksList[startInd].priority = tasksList[endInd].priority
       const modulo = Math.abs(startInd - endInd)
       let leftOffset, rightOffset
       for(let i = 0; i < modulo; i++){
