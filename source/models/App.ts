@@ -8,17 +8,15 @@ export const ProjectLink = 'https://github.com/xelAraY/Nezaboodka_ToDoList'
 export class App extends ReactiveObject {
   sensors: HtmlSensors
   tasksList: Task[]
-  id: number
 
   constructor(version: string) {
     super()
     this.sensors = new HtmlSensors()
-    this.id = 0
 
     const tasks = JSON.parse(localStorage.getItem('tasks') as string) as Task[]
     if (tasks !== null){
       this.tasksList = tasks.map( element => {
-        const task = new Task(element.text, element.priority)
+        const task = new Task(element.text, element.priority, element.id)
         task.isActive = element.isActive
         task.isEdit = element.isEdit
         return task
@@ -48,7 +46,11 @@ export class App extends ReactiveObject {
   @transaction
   addTask(text: string, priority: string): void {
     const taskList = this.tasksList = this.tasksList.toMutable()
-    taskList.push(new Task(this.convertText(text), priority))
+
+    const listSize = taskList.length+1
+    let number
+    listSize < 1 ? number = 0 : number = listSize - 1
+    taskList.push(new Task(this.convertText(text), priority, number))
   }
 
   @transaction

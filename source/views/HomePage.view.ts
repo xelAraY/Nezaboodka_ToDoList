@@ -14,15 +14,13 @@ function DisplayPriority(app: App, priority: string) {
   }
   app.tasksList.forEach(element => {
     if (element.isActive && element.priority === priority) {
-      TaskBlock(element, app.id.toString(), app)
-      app.id++
+      TaskBlock(element, app)
     }
   })
 
   app.tasksList.forEach(element => {
     if (!element.isActive && element.priority === priority) {
-      TaskBlock(element, app.id.toString(), app)
-      app.id++
+      TaskBlock(element, app)
     }
   })
 }
