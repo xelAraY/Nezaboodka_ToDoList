@@ -44,7 +44,6 @@ export function HomePageView(app: App) {
         TextArea('Input_Area', e => {
           inputArea = e
           e.className = style.class.Input_Area
-          e.draggable = true
           e.placeholder = 'Enter the task...'
           e.dataForSensor.keyboard = () => {
             if (inputArea.value.trim() != ''){
@@ -52,15 +51,26 @@ export function HomePageView(app: App) {
               inputArea.value = ''
             }
           }
+          let isResize = false
           e.onmousemove = (_) => {
             const delta = Math.abs(_.offsetY / e.offsetHeight)
+            if (isResize){
+              func(_)
+            }
             if ((delta < 0.05) || (1 - delta < 0.05)){
               e.style.cursor = 'ns-resize'
+              if (_.buttons === 1){
+                isResize = true
+              }
+              else{
+                isResize = false
+              }
+
             }else{
               e.style.cursor = 'default'
             }
           }
-          const func = (_: DragEvent) => {
+          const func = (_: MouseEvent) => {
             const y = _.offsetY
             const height:number = Number(e.style.height.replace('px',''))
             if (height - y > 35 && _.pageY != 0){
@@ -73,8 +83,6 @@ export function HomePageView(app: App) {
             }
             console.log(height - y)
           }
-          e.ondrag = func
-          e.ondragend = func
         })
 
         RxSelect('Priority', null, e => {
