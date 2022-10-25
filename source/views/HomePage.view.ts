@@ -58,8 +58,6 @@ export function HomePageView(app: App) {
           }
           let isResize = false
           resizeFunction = (_: MouseEvent) => {
-            if (!isResize)
-              return
             const y = _.offsetY
             const height = e.offsetHeight
             let heightStyle:string
