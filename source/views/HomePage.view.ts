@@ -14,13 +14,15 @@ function DisplayPriority(app: App, priority: string) {
   }
   app.tasksList.forEach(element => {
     if (element.isActive && element.priority === priority) {
-      TaskBlock(element, app)
+      TaskBlock(element, app.id.toString(), app)
+      app.id++
     }
   })
 
   app.tasksList.forEach(element => {
     if (!element.isActive && element.priority === priority) {
-      TaskBlock(element, app)
+      TaskBlock(element, app.id.toString(), app)
+      app.id++
     }
   })
 }
@@ -31,13 +33,16 @@ export function HomePageView(app: App) {
       let options: HTMLOptionsCollection
       let select: HTMLSelectElement
 
+      let taskListElement: HTMLElement
       RxUL('List', null, e => {
+        taskListElement = e
         e.className = style.class.List
         for (const priority in Priority){
           DisplayPriority(app, priority)
         }
       })
 
+      let resizeFunction: Function
       Div('Input_Block', block => {
         block.className = style.class.Input_Block
         let inputArea: HTMLTextAreaElement
@@ -52,10 +57,26 @@ export function HomePageView(app: App) {
             }
           }
           let isResize = false
+          resizeFunction = (_: MouseEvent) => {
+            if (!isResize)
+              return
+            const y = _.offsetY
+            const height = e.offsetHeight
+            let heightStyle:string
+            if (height - y > 35 && _.pageY != 0){
+              heightStyle = (height - y).toString() + 'px'
+            }else{
+              heightStyle = '35 px'
+            }
+            e.style.height = heightStyle
+            e.style.maxHeight = heightStyle
+            taskListElement.style.height = 'calc(100vh - (135px + ' + heightStyle + ' ) )'
+            console.log(height - y)
+          }
           e.onmousemove = (_) => {
             const delta = Math.abs(_.offsetY / e.offsetHeight)
             if (isResize){
-              func(_)
+              resizeFunction(_)
             }
             if ((delta < 0.05) || (1 - delta < 0.05)){
               e.style.cursor = 'ns-resize'
@@ -70,21 +91,10 @@ export function HomePageView(app: App) {
               e.style.cursor = 'default'
             }
           }
-          const func = (_: MouseEvent) => {
-            const y = _.offsetY
-            const height:number = Number(e.style.height.replace('px',''))
-            if (height - y > 35 && _.pageY != 0){
-              const heightStyle: string = (height - y).toString() + 'px'
-              e.style.height = heightStyle
-              e.style.maxHeight = heightStyle
-            }else{
-              e.style.height = '35 px'
-              e.style.maxHeight = '35 px'
-            }
-            console.log(height - y)
+          e.onmouseleave = (_) => {
+            isResize = false
           }
         })
-
         RxSelect('Priority', null, e => {
           e.className = style.class.Priority
           select = e

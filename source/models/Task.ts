@@ -13,16 +13,14 @@ export class Task extends ReactiveObject {
   isActive: boolean
   isEdit: boolean
   priority: string
-  id: number
 
-  constructor(text: string, priority: string, id: number){
+  constructor(text: string, priority: string){
     super()
     this.text = text
     this.newText = ''
     this.isActive = true
     this.isEdit = false
     this.priority = priority
-    this.id = id
   }
 
   @transaction
