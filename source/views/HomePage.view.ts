@@ -1,4 +1,4 @@
-import { Div, Img, RxUL, RxSelect, Select, TextArea, RxNode } from 'reactronic-dom'
+import { Div, Img, RxUL, RxSelect, TextArea } from 'reactronic-dom'
 import { PageView } from './Page.view'
 import { style } from './Page.css'
 import { App } from '../models/App'
@@ -118,10 +118,4 @@ export function HomePageView(app: App) {
       })
     })
   )
-}
-
-function findLinesCount(text: string):number{
-  const reg = /\r\n|\r|\n/
-  return text.split(reg).length
-
 }

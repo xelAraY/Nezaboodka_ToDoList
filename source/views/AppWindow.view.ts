@@ -1,4 +1,4 @@
-import { A, Div, RxA, RxDiv } from 'reactronic-dom'
+import { Div } from 'reactronic-dom'
 import { App } from '../models/App'
 import { style } from './AppWindow.css'
 import { HomePageView } from './HomePage.view'

@@ -1,7 +1,6 @@
-import { ReactiveObject, reaction, isnonreactive, transaction } from 'reactronic'
+import { ReactiveObject, reaction, transaction } from 'reactronic'
 import { HtmlSensors, KeyboardModifiers } from 'reactronic-dom'
 import { Task } from './Task'
-import { Priority } from '../models/Task'
 
 export const ProjectLink = 'https://github.com/xelAraY/Nezaboodka_ToDoList'
 
@@ -48,10 +47,6 @@ export class App extends ReactiveObject {
   @transaction
   addTask(text: string, priority: string): void {
     const taskList = this.tasksList = this.tasksList.toMutable()
-
-    const listSize = taskList.length+1
-    let number
-    listSize < 1 ? number = 0 : number = listSize - 1
     taskList.push(new Task(this.convertText(text), priority))
   }
 
