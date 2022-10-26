@@ -24,9 +24,7 @@ export function TaskBlock(task: Task, id:String, app: App) {
 
           e.dataForSensor.click = () => task.changeState()
           let inputText = task.text
-          while (inputText.includes('\n')){
-            inputText = inputText.replace('\n', '<br>')
-          }
+          inputText = inputText.replace(/\n/g, '<br>')
           e.innerHTML = inputText
         })
       }
