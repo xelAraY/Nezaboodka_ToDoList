@@ -1,4 +1,4 @@
-import {ReactiveObject, transaction} from 'reactronic'
+import {ObservableObject, transactional} from 'reactronic'
 
 export enum Priority {
   Overdue = 'Overdue',
@@ -7,7 +7,7 @@ export enum Priority {
   Soon = 'Soon',
 }
 
-export class Task extends ReactiveObject {
+export class Task extends ObservableObject {
   text: string
   newText: string
   isActive: boolean
@@ -23,7 +23,7 @@ export class Task extends ReactiveObject {
     this.priority = priority
   }
 
-  @transaction
+  @transactional
   changeState(): void {
     this.isActive = !this.isActive
   }

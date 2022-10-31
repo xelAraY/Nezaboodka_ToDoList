@@ -1,8 +1,8 @@
-import { Div, Customize } from 'reactronic-dom'
+import { Div, Render } from 'reactron'
 import { App } from '../models/App'
 import { style } from './Page.css'
 
-export function PageView(app: App, customizeContent?: Customize<HTMLElement>, customizeRightSide?: Customize<HTMLElement>) {
+export function PageView(app: App, customizeContent?: Render<HTMLElement>, customizeRightSide?: Render<HTMLElement>) {
   return (
     Div('PageView-', e => {
       e.className = style.class.Page
@@ -13,7 +13,7 @@ export function PageView(app: App, customizeContent?: Customize<HTMLElement>, cu
       Div('Content', e => {
         e.className = style.class.Content
 
-      }).wrapWith(customizeContent)
-    }).wrapWith(customizeRightSide)
+      }).wrapBy(customizeContent)
+    }).wrapBy(customizeRightSide)
   )
 }

@@ -1,4 +1,4 @@
-import { Div, Img, RxUL, RxSelect, TextArea } from 'reactronic-dom'
+import { Div, Img, RxUL, RxSelect, TextArea } from 'reactron'
 import { PageView } from './Page.view'
 import { style } from './Page.css'
 import { App } from '../models/App'
@@ -29,7 +29,7 @@ function DisplayPriority(app: App, priority: string) {
 
 export function HomePageView(app: App) {
   return (
-    PageView(app, e => {
+    PageView(app, (e: HTMLElement) => {
       let options: HTMLOptionsCollection
       let select: HTMLSelectElement
 

@@ -1,4 +1,4 @@
-import { Div } from 'reactronic-dom'
+import { Div } from 'reactron'
 import { App } from '../models/App'
 import { style } from './AppWindow.css'
 import { HomePageView } from './HomePage.view'

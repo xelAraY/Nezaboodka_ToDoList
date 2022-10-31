@@ -1,10 +1,10 @@
-import { ReactiveObject, reaction, transaction } from 'reactronic'
-import { HtmlSensors, KeyboardModifiers } from 'reactronic-dom'
+import { ObservableObject, reactive, transactional } from 'reactronic'
+import { HtmlSensors, KeyboardModifiers } from 'reactron'
 import { Task } from './Task'
 
 export const ProjectLink = 'https://github.com/xelAraY/Nezaboodka_ToDoList'
 
-export class App extends ReactiveObject {
+export class App extends ObservableObject {
   sensors: HtmlSensors
   tasksList: Task[]
   id:number
@@ -33,7 +33,7 @@ export class App extends ReactiveObject {
     return text
   }
 
-  @transaction
+  @transactional
   GetCount(priority: string): number{
     let count = 0
     this.tasksList.forEach((task) => {
@@ -44,19 +44,19 @@ export class App extends ReactiveObject {
     return count
   }
 
-  @transaction
+  @transactional
   addTask(text: string, priority: string): void {
     const taskList = this.tasksList = this.tasksList.toMutable()
     taskList.push(new Task(this.convertText(text), priority))
   }
 
-  @transaction
+  @transactional
   deleteTask(task: Task): void {
     const taskList = this.tasksList = this.tasksList.toMutable()
     taskList.splice(this.tasksList.indexOf(task), 1)
   }
 
-  @transaction
+  @transactional
   editTask(task: Task, newText?: string): void {
     if (task.isEdit && newText != null) {
       task.text = this.convertText(newText)
@@ -64,7 +64,7 @@ export class App extends ReactiveObject {
     task.isEdit = !task.isEdit
   }
 
-  @reaction
+  @reactive
   handleClick(): void {
     const pointer = this.sensors.pointer
     const data = pointer.clicked
@@ -73,7 +73,7 @@ export class App extends ReactiveObject {
     }
   }
 
-  @reaction
+  @reactive
   handleKeybord(): void {
     const keyboard = this.sensors.keyboard
     if ((keyboard.down === 'Enter') && (keyboard.modifiers !== KeyboardModifiers.Shift)) {
@@ -85,12 +85,12 @@ export class App extends ReactiveObject {
     }
   }
 
-  @reaction
+  @reactive
   saveTasks(): void {
     localStorage.setItem('tasks', JSON.stringify(this.tasksList))
   }
 
-  @reaction
+  @reactive
   handleDragAndDrop(): void{
     const drag = this.sensors.htmlDrag
     const task = drag.draggable as Task | undefined
