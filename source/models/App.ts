@@ -7,17 +7,15 @@ export const ProjectLink = 'https://github.com/xelAraY/Nezaboodka_ToDoList'
 export class App extends ObservableObject {
   sensors: HtmlSensors
   tasksList: Task[]
-  id:number
 
   constructor(version: string) {
     super()
     this.sensors = new HtmlSensors()
-    this.id = 0
 
     const tasks = JSON.parse(localStorage.getItem('tasks') as string) as Task[]
     if (tasks !== null){
       this.tasksList = tasks.map( element => {
-        const task = new Task(element.text, element.priority)
+        const task = new Task(element.text, element.priority, element.id)
         task.isActive = element.isActive
         task.isEdit = element.isEdit
         return task
@@ -47,7 +45,10 @@ export class App extends ObservableObject {
   @transactional
   addTask(text: string, priority: string): void {
     const taskList = this.tasksList = this.tasksList.toMutable()
-    taskList.push(new Task(this.convertText(text), priority))
+    let id
+    const length = taskList.length + 1
+    length > 1 ? id = taskList[length-2].id + 1 : id = 0
+    taskList.push(new Task(this.convertText(text), priority, id))
   }
 
   @transactional
