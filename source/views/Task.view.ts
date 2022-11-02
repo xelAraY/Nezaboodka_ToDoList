@@ -1,11 +1,11 @@
-import { Div, Img, RxLI } from 'reactron'
+import { Div, Img, RxLI } from 'verstak'
 import { Task } from '../models/Task'
 import { App } from '../models/App'
 import { style } from './Task.css'
 
 export function TaskBlock(task: Task, app: App) {
   return (
-    RxLI('Task'+task.id, task, e => {
+    RxLI('Task'+task.id, undefined, e => {
       e.className = style.class.Task
       let inputArea: HTMLDivElement
 
@@ -14,7 +14,7 @@ export function TaskBlock(task: Task, app: App) {
       e.draggable = task.isActive && !task.isEdit ? true : false
 
       if (!task.isEdit) {
-        Div('Task_text', e => {
+        Div('Task_text', undefined, e => {
           if (task.isActive) {
             e.className = style.class.Active_Task_text
           }
@@ -29,7 +29,7 @@ export function TaskBlock(task: Task, app: App) {
         })
       }
       else {
-        Div('Input_text', e => {
+        Div('Input_text', undefined, e => {
           e.contentEditable = 'true'
           inputArea = e
           e.innerHTML = task.text
@@ -45,22 +45,22 @@ export function TaskBlock(task: Task, app: App) {
       }
 
       if (task.isActive) {
-        Div('Task_edit', e => {
+        Div('Task_edit', undefined, e => {
           e.className = style.class.Task_edit
           e.dataForSensor.click = () => {
             task.isEdit ? app.editTask(task, inputArea.innerHTML) : app.editTask(task)
           }
-          Img('Edit_icon', e => {
+          Img('Edit_icon', undefined, e => {
             e.src = task.isEdit ? '../assets/check-solid.svg' : '../assets/pencil-solid.svg'
             e.className = style.class.Edit_Icon
           })
         })
       }
 
-      Div('Task_delete', e => {
+      Div('Task_delete', undefined, e => {
         e.className = style.class.Task_delete
         e.dataForSensor.click = () => { app.deleteTask(task) }
-        Img('Delete-icon', e => {
+        Img('Delete-icon', undefined, e => {
           e.src = '../assets/trash-solid.svg'
           e.className = style.class.Delete_Icon
         })

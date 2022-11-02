@@ -1,4 +1,4 @@
-import { Div, Img, RxUL, RxSelect, TextArea } from 'reactron'
+import { Div, Img, RxUL, RxSelect, TextArea } from 'verstak'
 import { PageView } from './Page.view'
 import { style } from './Page.css'
 import { App } from '../models/App'
@@ -7,7 +7,7 @@ import { Priority } from '../models/Task'
 
 function DisplayPriority(app: App, priority: string) {
   if (app.GetCount(priority) !== 0){
-    Div('Priority_Name'+priority, e => {
+    Div('Priority_Name'+priority, undefined, e => {
       e.className = style.class.Priority_Name
       e.innerHTML = priority
     })
@@ -32,7 +32,7 @@ export function HomePageView(app: App) {
       let select: HTMLSelectElement
 
       let taskListElement: HTMLElement
-      RxUL('List', null, e => {
+      RxUL('List', undefined, e => {
         taskListElement = e
         e.className = style.class.List
         for (const priority in Priority){
@@ -41,10 +41,10 @@ export function HomePageView(app: App) {
       })
 
       let resizeFunction: Function
-      Div('Input_Block', block => {
+      Div('Input_Block', undefined, block => {
         block.className = style.class.Input_Block
         let inputArea: HTMLTextAreaElement
-        TextArea('Input_Area', e => {
+        TextArea('Input_Area', undefined, e => {
           inputArea = e
           e.className = style.class.Input_Area
           e.placeholder = 'Enter the task...'
@@ -91,7 +91,7 @@ export function HomePageView(app: App) {
             isResize = false
           }
         })
-        RxSelect('Priority', null, e => {
+        RxSelect('Priority', undefined, e => {
           e.className = style.class.Priority
           select = e
           options = e.options
@@ -100,7 +100,7 @@ export function HomePageView(app: App) {
           }
         })
 
-        Div('Submit', e => {
+        Div('Submit', undefined, e => {
           e.className = style.class.Submit
           e.dataForSensor.click = () => {
             if (inputArea.value.trim() != ''){
@@ -108,7 +108,7 @@ export function HomePageView(app: App) {
               inputArea.value = ''
             }
           }
-          Img('Submit_Img', e => {
+          Img('Submit_Img', undefined, e => {
             e.src = '../assets/plus-solid.svg'
             e.className = style.class.Submit_Img
           })

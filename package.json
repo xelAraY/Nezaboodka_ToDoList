@@ -27,7 +27,7 @@
     "normalize-url": "6.1.0",
     "prismjs": "1.27.0",
     "reactronic": "0.22.411",
-    "reactron": "0.22.411"
+    "verstak": "0.22.500"
   },
   "devDependencies": {
     "@types/jsdom": "16.2.13",

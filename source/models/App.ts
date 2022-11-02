@@ -1,5 +1,5 @@
 import { ObservableObject, reactive, transactional } from 'reactronic'
-import { HtmlSensors, KeyboardModifiers } from 'reactron'
+import { HtmlSensors, KeyboardModifiers } from 'verstak'
 import { Task } from './Task'
 
 export const ProjectLink = 'https://github.com/xelAraY/Nezaboodka_ToDoList'
