@@ -11,7 +11,7 @@ configureDebugging()
 
 const app = Transaction.run(null, () => new App(version))
 
-RxNode.forAllNodesDo(() => {
+RxNode.root(() => {
   RxHtmlBody('html > body', null, body => {
     AppWindow(app)
   })
