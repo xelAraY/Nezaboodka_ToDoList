@@ -3,9 +3,9 @@ import { Task } from '../models/Task'
 import { App } from '../models/App'
 import { style } from './Task.css'
 
-export function TaskBlock(task: Task, id:String, app: App) {
+export function TaskBlock(task: Task, app: App) {
   return (
-    RxLI('Task'+id, task, e => {
+    RxLI('Task'+task.id, task, e => {
       e.className = style.class.Task
       let inputArea: HTMLDivElement
 
