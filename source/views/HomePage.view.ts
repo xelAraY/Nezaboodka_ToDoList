@@ -55,6 +55,13 @@ export function HomePageView(app: App) {
               inputArea.value = ''
             }
           }
+          e.onkeydown = () => {
+            const linesCount = findLinesCount(e.value)
+            const height = (linesCount <= 4 ? linesCount : 4) * 20 + 15
+            e.style.height = height + 'px'
+            e.style.maxHeight = height + 'px'
+            e.value = e.value
+          }
 
           resizeFunction = (_: MouseEvent) => {
             const y =  _.movementY
@@ -65,10 +72,11 @@ export function HomePageView(app: App) {
               return
             }
 
-            if (height - y > 35 ){
+            const minHeight = findHeightText(findLinesCount(e.value))
+            if (height - y > minHeight ){
               heightStyle = (height - y).toString() + 'px'
             }else{
-              heightStyle = '35px'
+              heightStyle = minHeight + 'px'
             }
             console.log(e.style.height)
             e.style.height = heightStyle
@@ -128,4 +136,13 @@ export function HomePageView(app: App) {
       }
     })
   )
+}
+
+function findLinesCount(text: string):number{
+  const reg = /\r\n|\r|\n/
+  return text.split(reg).length
+}
+
+function findHeightText(linesCount: number):number{
+  return (linesCount <= 4 ? linesCount : 4) * 20 + 15
 }
