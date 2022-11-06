@@ -30,6 +30,7 @@ export function HomePageView(app: App) {
     PageView(app, (e: HTMLElement) => {
       let options: HTMLOptionsCollection
       let select: HTMLSelectElement
+      let isResize = false
 
       let taskListElement: HTMLElement
       RxUL('List', undefined, e => {
@@ -54,40 +55,42 @@ export function HomePageView(app: App) {
               inputArea.value = ''
             }
           }
-          let isResize = false
+
           resizeFunction = (_: MouseEvent) => {
-            const y = _.offsetY
-            const height = e.offsetHeight
+            const y =  _.movementY
+            const height = (Number)(e.style.height.replace('px', ''))
+            console.log(y)
             let heightStyle:string
-            if (height - y > 35 && _.pageY != 0){
+            if (y == 0){
+              return
+            }
+
+            if (height - y > 35 ){
               heightStyle = (height - y).toString() + 'px'
             }else{
-              heightStyle = '35 px'
+              heightStyle = '35px'
             }
+            console.log(e.style.height)
             e.style.height = heightStyle
             e.style.maxHeight = heightStyle
             taskListElement.style.height = 'calc(100vh - (135px + ' + heightStyle + ' ) )'
-            console.log(height - y)
           }
           e.onmousemove = (_) => {
             const delta = Math.abs(_.offsetY / e.offsetHeight)
-            if (isResize){
-              resizeFunction(_)
+            if(_.buttons !== 1){
+              isResize = false
             }
+
             if ((delta < 0.05) || (1 - delta < 0.05)){
               e.style.cursor = 'ns-resize'
               if (_.buttons === 1){
                 isResize = true
               }
-              else{
-                isResize = false
-              }
-
             }else{
               e.style.cursor = 'default'
             }
           }
-          e.onmouseleave = (_) => {
+          e.onmouseup = (_) => {
             isResize = false
           }
         })
@@ -114,6 +117,14 @@ export function HomePageView(app: App) {
           })
         })
       })
+      e.onmousemove = (_:MouseEvent) => {
+        if (isResize){
+          resizeFunction(_)
+        }
+      }
+      e.onmouseup = (_) => {
+        isResize = false
+      }
     })
   )
 }
