@@ -114,6 +114,7 @@ export function HomePageView(app: App) {
           Img('Submit_Img', undefined, e => {
             e.src = '../assets/plus-solid.svg'
             e.className = style.class.Submit_Img
+            e.setAttribute('draggable', 'false')
           })
         })
       })

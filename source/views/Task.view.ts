@@ -53,7 +53,9 @@ export function TaskBlock(task: Task, app: App) {
           Img('Edit_icon', undefined, e => {
             e.src = task.isEdit ? '../assets/check-solid.svg' : '../assets/pencil-solid.svg'
             e.className = style.class.Edit_Icon
+            e.setAttribute('draggable', 'false')
           })
+          e.draggable = false
         })
       }
 
@@ -63,7 +65,9 @@ export function TaskBlock(task: Task, app: App) {
         Img('Delete-icon', undefined, e => {
           e.src = '../assets/trash-solid.svg'
           e.className = style.class.Delete_Icon
+          e.setAttribute('draggable', 'false')
         })
+        e.draggable = false
       })
     })
   )
