@@ -51,6 +51,18 @@ module.exports = {
         enforce: 'pre',
         loader: 'source-map-loader',
       },
+
+      {
+        test: /\.m?js/,
+        type: "javascript/auto",
+      },
+      {
+        test: /\.m?js/,
+        resolve: {
+          fullySpecified: false,
+        },
+      },
+
       {
         test: /\.tsx?$/,
         exclude: /node_modules/,

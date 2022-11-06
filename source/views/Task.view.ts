@@ -29,7 +29,7 @@ export function TaskBlock(task: Task, app: App) {
         })
       }
       else {
-        Div('Input_text', undefined,  e => {
+        Div('Input_text', undefined, e => {
           e.contentEditable = 'true'
           inputArea = e
           e.innerHTML = task.text
