@@ -58,9 +58,10 @@ export function HomePageView(app: App) {
           e.onkeydown = () => {
             const linesCount = findLinesCount(e.value)
             const height = (linesCount <= 4 ? linesCount : 4) * 20 + 15
-            e.style.height = height + 'px'
-            e.style.maxHeight = height + 'px'
-            e.value = e.value
+            if ((Number)(e.style.height.replace('px', '')) < height || linesCount < 4){
+              e.style.height = height + 'px'
+              e.style.maxHeight = height + 'px'
+            }
           }
 
           resizeFunction = (_: MouseEvent) => {
